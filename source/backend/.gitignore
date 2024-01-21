@@ -1,0 +1,46 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDEの設定ファイルなど
+.vscode/
+.idea/
+
+# 依存関係やビルドファイル
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+*.pyz
+*.pyc
+*.pyo
+__pycache__/
+dist/
+build/
+*.egg-info/
+*.egg
+*.tar.gz
+*.log
+
+# macOSのシステムファイル
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# ローカルの設定ファイル（例: .envファイル）
+.env
+
+# キャッシュやログファイル
+*.log
+*.cache
+*.idea/

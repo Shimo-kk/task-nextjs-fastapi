@@ -1,0 +1,26 @@
+services:
+  backend-web:
+    container_name: task-backend-web
+    build:
+      context: .
+      dockerfile: container/nginx/Dockerfile
+    depends_on:
+        - backend-app
+    ports:
+        - "80:80"
+        - "443:443"
+    volumes:
+        - ./container/nginx/conf.d:/etc/nginx/conf.d
+        - ./container/nginx/ssl:/etc/nginx/ssl
+
+  backend-app:
+    container_name: task-backend-app
+    build:
+      context: .
+      dockerfile: container/python/Dockerfile
+    expose:
+      - 8000
+    volumes:
+      - ./source/backend:/source
+    restart: always
+    tty: true
