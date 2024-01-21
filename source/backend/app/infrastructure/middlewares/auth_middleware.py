@@ -35,7 +35,7 @@ class AuthMiddleware(BaseHTTPMiddleware):
             try:
                 csrf_auth.validate_csrf(request)
             except Exception:
-                raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="JWTトークンが設定されていません。")
+                raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="CSRFトークンの認証に失敗しました。")
 
         # JWT認証
         if request.url.path in AWT_AUTH_EXCLUSION_PATH:
