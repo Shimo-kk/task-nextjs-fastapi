@@ -4,10 +4,14 @@ import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
+from app.infrastructure.middlewares.http_request_middleware_test import TestHttpRequestMiddleware
+from app.infrastructure.middlewares.auth_middleware import AuthMiddleware
 from app.infrastructure.database.postgresql_test import SQLALCHEMY_DATABASE_URL, engine, get_db_session
 from app.infrastructure.dtos import Base
 
 test_app = FastAPI()
+test_app.add_middleware(AuthMiddleware)
+test_app.add_middleware(TestHttpRequestMiddleware)
 
 
 def create_test_data(session):
