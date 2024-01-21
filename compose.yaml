@@ -24,3 +24,18 @@ services:
       - ./source/backend:/source
     restart: always
     tty: true
+
+  frontend-app:
+    container_name: task-frontend-app
+    build:
+      context: .
+      dockerfile: container/nodejs/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./source/frontend:/source
+      - node_modules:/source/node_modules
+    tty: true
+
+volumes:
+  node_modules:
