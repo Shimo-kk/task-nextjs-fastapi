@@ -9,7 +9,9 @@ from app.infrastructure.middlewares.auth_middleware import AuthMiddleware
 from app.infrastructure.database.postgresql_test import SQLALCHEMY_DATABASE_URL, engine, get_db_session
 from app.infrastructure.dtos import Base
 from app.infrastructure.dtos.work_space_dto import WorkSpaceDTO
+from app.infrastructure.dtos.user_dto import UserDto
 from app.domain.entitys.work_space_entity import WorkSpaceEntity
+from app.domain.entitys.user_entity import UserEntity
 
 test_app = FastAPI()
 test_app.add_middleware(AuthMiddleware)
@@ -24,6 +26,26 @@ def create_test_data(session):
         WorkSpaceDTO.from_entity(WorkSpaceEntity.create(name="test3.workspace")),
     ]
     session.add_all(test_work_spaces)
+
+    # user
+    test_users: list[UserDto] = [
+        UserDto.from_entity(
+            UserEntity.create(
+                work_space_id=1, name="test user1", email="test1@example.com", password="testtest", is_admin=True
+            )
+        ),
+        UserDto.from_entity(
+            UserEntity.create(
+                work_space_id=1, name="test user2", email="test2@example.com", password="testtest", is_admin=False
+            )
+        ),
+        UserDto.from_entity(
+            UserEntity.create(
+                work_space_id=1, name="test user3", email="test3@example.com", password="testtest", is_admin=False
+            )
+        ),
+    ]
+    session.add_all(test_users)
 
     session.commit()
     session.remove()
