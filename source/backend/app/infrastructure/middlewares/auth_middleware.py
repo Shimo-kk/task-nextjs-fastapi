@@ -10,7 +10,7 @@ CSRF_AUTH_EXCLUSION_METHOD = [
 ]
 
 # JWTトークン認証を行わないパス
-AWT_AUTH_EXCLUSION_PATH = ["/", "/favicon.ico", "/docs", "/openapi.json", "/csrf"]
+AWT_AUTH_EXCLUSION_PATH = ["/", "/favicon.ico", "/docs", "/openapi.json", "/api/csrf"]
 
 
 class AuthMiddleware(BaseHTTPMiddleware):
