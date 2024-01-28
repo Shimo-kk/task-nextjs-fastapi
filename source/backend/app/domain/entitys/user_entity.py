@@ -180,7 +180,7 @@ class IUserRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def find_by_email(self, email: str) -> UserEntity:
+    def find_by_email(self, work_space_id: int, email: str) -> UserEntity:
         raise NotImplementedError
 
     @abstractmethod

@@ -26,26 +26,40 @@ def create_test_data(session):
         WorkSpaceDTO.from_entity(WorkSpaceEntity.create(name="test3.workspace")),
     ]
     session.add_all(test_work_spaces)
+    session.flush()
 
     # user
     test_users: list[UserDto] = [
         UserDto.from_entity(
             UserEntity.create(
-                work_space_id=1, name="test user1", email="test1@example.com", password="testtest", is_admin=True
+                work_space_id=1,
+                name="test user1",
+                email="test1@example.com",
+                password="testtest",
+                is_admin=True,
             )
         ),
         UserDto.from_entity(
             UserEntity.create(
-                work_space_id=1, name="test user2", email="test2@example.com", password="testtest", is_admin=False
+                work_space_id=1,
+                name="test user2",
+                email="test2@example.com",
+                password="testtest",
+                is_admin=False,
             )
         ),
         UserDto.from_entity(
             UserEntity.create(
-                work_space_id=1, name="test user3", email="test3@example.com", password="testtest", is_admin=False
+                work_space_id=1,
+                name="test user3",
+                email="test3@example.com",
+                password="testtest",
+                is_admin=False,
             )
         ),
     ]
     session.add_all(test_users)
+    session.flush()
 
     session.commit()
     session.remove()
@@ -64,6 +78,7 @@ def session():
     yield session
     session.remove()
 
+    alembic.command.downgrade(alembic_cfg, "base")
     Base.metadata.drop_all(bind=engine)
 
 
@@ -79,4 +94,5 @@ def client():
     client = TestClient(test_app)
     yield client
 
+    alembic.command.downgrade(alembic_cfg, "base")
     Base.metadata.drop_all(bind=engine)
