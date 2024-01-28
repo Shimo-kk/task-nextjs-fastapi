@@ -1,0 +1,2 @@
+class ValueObjectValidError(Exception):
+    pass
