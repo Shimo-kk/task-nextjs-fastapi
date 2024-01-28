@@ -8,6 +8,8 @@ from app.infrastructure.middlewares.http_request_middleware_test import TestHttp
 from app.infrastructure.middlewares.auth_middleware import AuthMiddleware
 from app.infrastructure.database.postgresql_test import SQLALCHEMY_DATABASE_URL, engine, get_db_session
 from app.infrastructure.dtos import Base
+from app.infrastructure.dtos.work_space_dto import WorkSpaceDTO
+from app.domain.entitys.work_space_entity import WorkSpaceEntity
 
 test_app = FastAPI()
 test_app.add_middleware(AuthMiddleware)
@@ -15,7 +17,16 @@ test_app.add_middleware(TestHttpRequestMiddleware)
 
 
 def create_test_data(session):
-    pass
+    # work_space
+    test_work_spaces: list[WorkSpaceDTO] = [
+        WorkSpaceDTO.from_entity(WorkSpaceEntity.create(name="test1.workspace")),
+        WorkSpaceDTO.from_entity(WorkSpaceEntity.create(name="test2.workspace")),
+        WorkSpaceDTO.from_entity(WorkSpaceEntity.create(name="test3.workspace")),
+    ]
+    session.add_all(test_work_spaces)
+
+    session.commit()
+    session.remove()
 
 
 @pytest.fixture(scope="function")
