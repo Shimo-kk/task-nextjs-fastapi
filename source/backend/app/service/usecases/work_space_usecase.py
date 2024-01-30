@@ -4,11 +4,7 @@ from app.domain.entitys.work_space_entity import WorkSpaceEntity, IWorkSpaceRepo
 from app.infrastructure.repositorys.user_repository import UserRepository
 from app.infrastructure.repositorys.work_space_repository import WorkSpaceRepository
 from app.service.models.work_space_model import WorkSpaceCreateModel, WorkSpaceReadModel
-from app.service.exceptions import (
-    ValidError,
-    AlreadyExistsError,
-    NotFoundError,
-)
+from app.service.exceptions import ValidError, AlreadyExistsError, NotFoundError
 
 
 class WorkSpaceUseCase:
@@ -76,18 +72,18 @@ class WorkSpaceUseCase:
         except Exception:
             raise
 
-    def get_work_space(self, name: str) -> WorkSpaceReadModel:
+    def get_work_space(self, id: int) -> WorkSpaceReadModel:
         """
         ワークスペースの取得
 
         Args:
-            name: ワークスペース名
+            id: 主キー
         Returns:
             WorkSpaceReadModel: 取得したワークスペースの参照モデル
         """
         try:
-            # 名称でワークスペースを取得
-            work_space_entity: WorkSpaceEntity = self.work_space_repository.find_by_name(name=name)
+            # ワークスペースを取得
+            work_space_entity: WorkSpaceEntity = self.work_space_repository.find_by_id(id=id)
             if not work_space_entity:
                 raise NotFoundError("ワークスペースが存在しません。")
 

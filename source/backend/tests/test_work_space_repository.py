@@ -38,6 +38,33 @@ def test_insert_ng_already_exists(session):
         assert True
 
 
+def test_get_ok(session):
+    """
+    取得 正常
+    """
+    try:
+        repository: IWorkSpaceRepository = WorkSpaceRepository(session)
+        entity: WorkSpaceEntity = repository.find_by_name(name="test1.workspace")
+    except Exception:
+        assert False
+
+    assert entity.id == 1
+    assert entity.name == "test1.workspace"
+
+
+def test_get_ng_not_found(session):
+    """
+    取得 異常 存在しない
+    """
+    try:
+        repository: IWorkSpaceRepository = WorkSpaceRepository(session)
+        entity: WorkSpaceEntity = repository.find_by_name(name="test.workspace")
+    except Exception:
+        assert False
+
+    assert entity is None
+
+
 def test_delete_ok(session):
     """
     削除 正常

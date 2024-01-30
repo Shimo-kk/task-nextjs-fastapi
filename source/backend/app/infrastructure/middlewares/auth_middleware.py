@@ -3,14 +3,20 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 from app.core.auth import csrf_auth, jwt_auth
 
-
 # CSRFトークン認証を行わないメソッド
 CSRF_AUTH_EXCLUSION_METHOD = [
     "GET",
 ]
 
 # JWTトークン認証を行わないパス
-AWT_AUTH_EXCLUSION_PATH = ["/", "/favicon.ico", "/docs", "/openapi.json", "/api/csrf"]
+AWT_AUTH_EXCLUSION_PATH = [
+    "/",
+    "/favicon.ico",
+    "/docs",
+    "/openapi.json",
+    "/api/csrf",
+    "/api/v1/work-space",
+]
 
 
 class AuthMiddleware(BaseHTTPMiddleware):

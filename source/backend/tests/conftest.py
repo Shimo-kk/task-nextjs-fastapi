@@ -5,17 +5,19 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from app.infrastructure.middlewares.http_request_middleware_test import TestHttpRequestMiddleware
-from app.infrastructure.middlewares.auth_middleware import AuthMiddleware
 from app.infrastructure.database.postgresql_test import SQLALCHEMY_DATABASE_URL, engine, get_db_session
 from app.infrastructure.dtos import Base
 from app.infrastructure.dtos.work_space_dto import WorkSpaceDTO
 from app.infrastructure.dtos.user_dto import UserDto
 from app.domain.entitys.work_space_entity import WorkSpaceEntity
 from app.domain.entitys.user_entity import UserEntity
+from app.presentation.routers import api_router
+from app.presentation.routers.v1 import api_v1_router
 
 test_app = FastAPI()
-test_app.add_middleware(AuthMiddleware)
 test_app.add_middleware(TestHttpRequestMiddleware)
+test_app.include_router(api_router, prefix="/api")
+test_app.include_router(api_v1_router, prefix="/api/v1")
 
 
 def create_test_data(session):

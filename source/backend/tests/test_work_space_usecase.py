@@ -53,9 +53,8 @@ def test_get_ok(session):
     ワークスペースの取得 正常
     """
     try:
-        name: str = "test1.workspace"
         usecase: WorkSpaceUseCase = WorkSpaceUseCase(session)
-        work_space_read_model: WorkSpaceReadModel = usecase.get_work_space(name=name)
+        work_space_read_model: WorkSpaceReadModel = usecase.get_work_space(id=1)
 
     except Exception:
         assert False
@@ -69,9 +68,8 @@ def test_get_ng_not_found(session):
     ワークスペースの取得 異常 存在しない
     """
     try:
-        name: str = "test.workspace"
         usecase: WorkSpaceUseCase = WorkSpaceUseCase(session)
-        _ = usecase.get_work_space(name=name)
+        _ = usecase.get_work_space(id=4)
         assert False
 
     except NotFoundError:
