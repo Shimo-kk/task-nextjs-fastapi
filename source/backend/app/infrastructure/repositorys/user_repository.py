@@ -97,8 +97,7 @@ class UserRepository(IUserRepository):
         user_dto: UserDto = UserDto.from_entity(user_entity)
         _user: UserDto = self.db_session.query(UserDto).filter_by(id=user_dto.id).first()
         _user.name = user_dto.name
-        _user.email = user_dto.email
-        _user.password = user_dto.password
+        _user.is_admin = user_dto.is_admin
         self.db_session.flush()
 
         result: UserEntity = _user.to_entity()

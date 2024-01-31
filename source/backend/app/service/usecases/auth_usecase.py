@@ -34,6 +34,8 @@ class AuthUseCase:
 
         Args:
             data: サインインモデル
+        Returns:
+            UserReadModel: サインインしたユーザーの参照モデル
         """
         try:
             # ワークスペース名でワークスペースを取得
@@ -73,6 +75,8 @@ class AuthUseCase:
         Args:
             work_space_name: ワークスペース名
             email: E-Mailアドレス
+        Returns:
+            UserReadModel: 取得したユーザーの参照モデル
         """
         try:
             # E-mailでユーザーを取得
