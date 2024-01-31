@@ -117,7 +117,7 @@ class UserUseCase:
         Args:
             data: ユーザー更新モデル
         Returns:
-            UserReadModel: 作成したユーザーの参照モデル
+            UserReadModel: 更新したユーザーの参照モデル
         """
         try:
             # 対象のユーザーを取得

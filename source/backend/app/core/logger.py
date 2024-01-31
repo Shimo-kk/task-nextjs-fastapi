@@ -32,7 +32,7 @@ handler.setLevel(logging.DEBUG)
 handler.setFormatter(formatter)
 
 # ログ設定
-root_logger = logging.getLogger()
+root_logger = logging.getLogger(__name__)
 root_logger.addHandler(handler)
 
 

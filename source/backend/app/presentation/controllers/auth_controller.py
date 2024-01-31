@@ -40,9 +40,9 @@ class AuthController:
             )
 
         except NotFoundError as e:
-            raise HTTPException(status_code=404, detail=str(e))
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
         except BadRequestError as e:
-            raise HTTPException(status_code=400, detail=str(e))
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
         except Exception:
             raise
 
@@ -74,7 +74,7 @@ class AuthController:
             access_token: str = request.cookies.get("access_token")
             scheme, _, token = access_token.partition(" ")
             if not access_token or scheme != "Bearer":
-                raise HTTPException(status_code=401, detail="トークンが設定されていません。")
+                raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="トークンが設定されていません。")
 
             # トークンのデコード
             subject = jwt_auth.decode_jwt(token)
@@ -90,4 +90,4 @@ class AuthController:
             return result
 
         except NotFoundError as e:
-            raise HTTPException(status_code=404, detail=str(e))
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
