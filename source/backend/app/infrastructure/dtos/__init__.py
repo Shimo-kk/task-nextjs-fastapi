@@ -19,23 +19,10 @@ class BaseDto(Base):
 
     __abstract__ = True
 
-    id: Union[int, Column] = Column(
-        INTEGER,
-        primary_key=True,
-        autoincrement=True,
-    )
-
+    id: Union[int, Column] = Column(INTEGER, primary_key=True, autoincrement=True)
     created_at: Union[datetime, Column] = Column(
-        TIMESTAMP(timezone=True),
-        server_default=func.now(),
-        nullable=False,
-        comment="登録日時",
+        TIMESTAMP(timezone=True), server_default=func.now(), nullable=False, comment="登録日時"
     )
-
     updated_at: Union[datetime, Column] = Column(
-        TIMESTAMP(timezone=True),
-        server_default=func.now(),
-        onupdate=func.now(),
-        nullable=False,
-        comment="更新日時",
+        TIMESTAMP(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False, comment="更新日時"
     )

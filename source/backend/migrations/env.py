@@ -9,6 +9,8 @@ from app.infrastructure.database.postgresql import SQLALCHEMY_DATABASE_URL
 from app.infrastructure.dtos import Base
 from app.infrastructure.dtos.work_space_dto import WorkSpaceDTO  # NOQA
 from app.infrastructure.dtos.user_dto import UserDto  # NOQA
+from app.infrastructure.dtos.project_dto import ProjectDTO  # NOQA
+from app.infrastructure.dtos.milestone_dto import MilestoneDTO  # NOQA
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
